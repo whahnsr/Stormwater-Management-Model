@@ -1592,8 +1592,9 @@ int locate(double y, double *table, int jLast)
     // Check if value >= the last entry
     if ( y >= table[jLast] ) return jLast;
 
-    // Current geometry tables contain either 26 or 51 entries.
-    step = jLast >= 32 ? 32 : 16;
+    step = 1;
+    while (step <= jLast / 2)
+        step <<= 1;
 
     // Search successively smaller power-of-two offsets.
     while ( step > 0 )
